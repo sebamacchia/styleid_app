@@ -27,33 +27,15 @@ MODEL_PATH = 'models/model_777.h5'
 # Load your trained model
 model = load_model(MODEL_PATH, compile=False)
 
-
 print('Model loaded. Check http://127.0.0.1:5000/')
 
 class_names = ['Abstract Art', 'Baroque', 'Cubism',
                'High Renaissance', 'Impressionism', 'Pop Art']
 
-# from PIL import Image, ImageChops
-# # F_IN = "/content/gdrive/MyDrive/QUEESTILOES/dataset/train/28363.jpg"
-# # F_OUT = "/content/impresionista11.jpg"
-# F_IN = "/content/Cuadro1.jpg"
-# F_OUT = "/content/Cuadro11.jpg"
-# size = (256,256)
-# image = Image.open(F_IN)
-# image.thumbnail(size, Image.ANTIALIAS)
-
-
-# image_size = image.size
-# thumb = image.crop( (0, 0, size[0], size[1]) )
-# offset_x = int(max( (size[0] - image_size[0]) / 2, 0 ))
-# offset_y = int(max( (size[1] - image_size[1]) / 2, 0 ) )
-# thumb = ImageChops.offset(thumb, offset_x, offset_y)
-# thumb.save(F_OUT)
 
 def model_predict(img_path, model):
 
     img = image.load_img(img_path, target_size=(256, 256))
-
     # Preprocessing the image
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
@@ -87,10 +69,7 @@ def upload():
         score = tf.nn.softmax(prediction[0])
 
         return str(format(class_names[np.argmax(score)]))
-        # return print(
-        #     "This image most likely belongs to {} with a {:.2f} percent confidence."
-        #     .format(class_names[np.argmax(score)], 100 * np.max(score))
-        # )
+
     return None
 
 
