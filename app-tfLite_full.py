@@ -45,23 +45,6 @@ class_names = ['Abstract Art', 'Baroque', 'Cubism',
                'High Renaissance', 'Impressionism', 'Pop Art']
 
 
-# img_array = keras.preprocessing.image.img_to_array(img)
-# img_array = tf.expand_dims(img_array, 0)
-
-# # Se normaliza la imagen
-# img_array = (img_array - np.min(img_array)) / \
-#     (np.max(img_array) - np.min(img_array))
-
-# # make the prediction
-# interpreter.set_tensor(input_details[0]['index'], img_array)
-# interpreter.invoke()
-# tflite_model_predictions = interpreter.get_tensor(
-#     output_details[0]['index'])
-
-# preds = tflite_model_predictions
-# print(preds)
-
-
 @app.route('/', methods=['GET'])
 def index():
     # Main page
