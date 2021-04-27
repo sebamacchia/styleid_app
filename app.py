@@ -6,44 +6,44 @@ import glob
 import re
 import numpy as np
 import tensorflow as tf
+import pandas as pd
 
 
 # Keras
 from keras.applications.imagenet_utils import preprocess_input, decode_predictions
 from keras.models import load_model
 from keras.preprocessing import image
+from tensorflow import keras
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
+from PIL import Image, ImageChops
+
 # Define a flask app
 app = Flask(__name__)
+# mode
 # c
 # MODEL_PATH = '/Users/juansebastianmacchia/Desktop/Deployment-Deep-Learning-Model-master/models/model_777.h5'
-MODEL_PATH = 'models/model_777.h5'
+# MODEL_PATH = '/models/tfLite_models/model.tflite_model1'
 
 # Load your trained model
-model = load_model(MODEL_PATH, compile=False)
+# model = load_model(MODEL_PATH, compile=False)
 
-print('Model loaded. Check http://127.0.0.1:5000/')
+# interpreter = tf.lite.Interpreter(
+#     model_path='/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model1')
+# interpreter.allocate_tensors()
+
+# input_details = interpreter.get_input_details()
+# output_details = interpreter.get_output_details()
+
+
+# print('Model loaded. Check http://127.0.0.1:5000/')
 
 class_names = ['Abstract Art', 'Baroque', 'Cubism',
                'High Renaissance', 'Impressionism', 'Pop Art']
-
-
-def model_predict(img_path, model):
-
-    img = image.load_img(img_path, target_size=(256, 256))
-    # Preprocessing the image
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = (x - np.min(x)) / (np.max(x) - np.min(x))
-
-    preds = model.predict(x)
-
-    return preds
 
 
 @app.route('/', methods=['GET'])
@@ -64,12 +64,80 @@ def upload():
             basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
 
-        # Make prediction
-        prediction = model_predict(file_path, model)
-        score = tf.nn.softmax(prediction[0])
+        F_IN = file_path
+        size = (256, 256)
+        image = Image.open(F_IN)
+        image.thumbnail(size, Image.ANTIALIAS)
+        image_size = image.size
+        thumb = image.crop((0, 0, size[0], size[1]))
+        offset_x = int(max((size[0] - image_size[0]) / 2, 0))
+        offset_y = int(max((size[1] - image_size[1]) / 2, 0))
+        img = ImageChops.offset(thumb, offset_x, offset_y)
 
-        return str(format(class_names[np.argmax(score)]))
+        img_array = keras.preprocessing.image.img_to_array(img)
+        img_array = tf.expand_dims(img_array, 0)
 
+        # Se normaliza la imagen
+        img_array = (img_array - np.min(img_array)) / \
+            (np.max(img_array) - np.min(img_array))
+
+        # _______________________________________________________________
+        # FOR TO MODELS
+        dataframe_all = pd.DataFrame()
+
+        dir_model = '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models'
+
+        model_list = ['/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model1',
+                      '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model2_1']
+
+        for model in model_list:
+
+            dataframe_aux = pd.DataFrame()
+
+            # model_path = os.path.join(dir_model, model)
+
+            interpreter = tf.lite.Interpreter(model_path=model)
+            interpreter.allocate_tensors()
+            input_details = interpreter.get_input_details()
+            output_details = interpreter.get_output_details()
+            # print("Input Shape:", input_details[0]['shape'])
+            # print("Input Type:", input_details[0]['dtype'])
+            # print("Output Shape:", output_details[0]['shape'])
+            # print("Output Type:", output_details[0]['dtype'])
+            interpreter.allocate_tensors()
+
+            # contador = 0
+            dataframe_aux = pd.DataFrame()
+            print('Model:', model)
+        # _______________________________________________________________
+        # make the prediction
+            interpreter.set_tensor(input_details[0]['index'], img_array)
+            interpreter.invoke()
+            tflite_model_predictions = interpreter.get_tensor(
+                output_details[0]['index'])
+
+            preds = tflite_model_predictions
+
+            dataframe_aux = pd.DataFrame(np.vstack(preds))
+
+            dataframe_all = pd.concat(
+                [dataframe_all, dataframe_aux], axis=1, ignore_index=True)
+        model = model
+        # ______________________________________________________
+
+        class_names1 = ['Abstract Art', 'Baroque', 'Cubism',
+                        'High Renaissance', 'Impressionism', 'Pop Art']
+        # return (
+        #     "   {} with a {:.2f} percent confidence."
+        #     .format(class_names1[np.argmax(tflite_model_predictions)], 100 * np.max(tflite_model_predictions))
+        # )
+        return str(dataframe_all)
+
+        # return str(format(class_names[np.argmax(score)]))
+        # return print(
+        #     "This image most likely belongs to {} with a {:.2f} percent confidence."
+        #     .format(class_names[np.argmax(score)], 100 * np.max(score))
+        # )
     return None
 
 
