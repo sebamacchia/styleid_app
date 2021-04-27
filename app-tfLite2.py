@@ -6,7 +6,7 @@ import glob
 import re
 import numpy as np
 import tensorflow as tf
-
+# no
 
 # Keras
 from keras.applications.imagenet_utils import preprocess_input, decode_predictions
