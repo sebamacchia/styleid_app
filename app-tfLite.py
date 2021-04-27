@@ -17,18 +17,23 @@ from keras.preprocessing import image
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
+from PIL import Image, ImageChops
 
 # Define a flask app
 app = Flask(__name__)
 # c
 # MODEL_PATH = '/Users/juansebastianmacchia/Desktop/Deployment-Deep-Learning-Model-master/models/model_777.h5'
-MODEL_PATH = '/models/tfLite_models/model.tflite_model1'
+# MODEL_PATH = '/models/tfLite_models/model.tflite_model1'
 
 # Load your trained model
 # model = load_model(MODEL_PATH, compile=False)
 
-interpreter = tf.lite.Interpreter(model_path='/content/model.tflite')
+interpreter = tf.lite.Interpreter(
+    model_path='/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model1')
 interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 
 
 print('Model loaded. Check http://127.0.0.1:5000/')
@@ -53,7 +58,7 @@ class_names = ['Abstract Art', 'Baroque', 'Cubism',
 # thumb = ImageChops.offset(thumb, offset_x, offset_y)
 # thumb.save(F_OUT)
 
-def model_predict(img_path, model):
+def model_predict(img_path, interpreter):
     # ____________________________________________________________________
     F_IN = img_path
     size = (256, 256)
@@ -78,18 +83,12 @@ def model_predict(img_path, model):
     interpreter.invoke()
     tflite_model_predictions = interpreter.get_tensor(
         output_details[0]['index'])
-    # print("Prediction results shape:", tflite_model_predictions.shape)
-    # prediction_classes = np.argmax(tflite_model_predictions, axis=1)
-    # print(prediction_classes)
-    # print(prediction_classes.shape)
-    # print(tflite_model_predictions.shape)
-    # predictions = model.predict(img_array)
-    # print('prediccion: ',tflite_model_predictions)
+
 
 # ____________________________________________________________________
 
     preds = tflite_model_predictions
-
+    print(preds)
     return preds
 
 
@@ -112,7 +111,7 @@ def upload():
         f.save(file_path)
 
         # Make prediction
-        prediction = model_predict(file_path, model)
+        prediction = model_predict(file_path, interpreter)
         score = tf.nn.softmax(prediction[0])
 
         return str(format(class_names[np.argmax(score)]))
