@@ -6,3 +6,4 @@ tensorflow-cpu
 werkzeug
 gunicorn
 uwsgi
+pandas

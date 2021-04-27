@@ -52,93 +52,93 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/predict', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
+# @app.route('/predict', methods=['GET', 'POST'])
+# def upload():
+#     if request.method == 'POST':
+#         # Get the file from post request
+#         f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
-            basepath, 'uploads', secure_filename(f.filename))
-        f.save(file_path)
+#         # Save the file to ./uploads
+#         basepath = os.path.dirname(__file__)
+#         file_path = os.path.join(
+#             basepath, 'uploads', secure_filename(f.filename))
+#         f.save(file_path)
 
-        F_IN = file_path
-        size = (256, 256)
-        image = Image.open(F_IN)
-        image.thumbnail(size, Image.ANTIALIAS)
-        image_size = image.size
-        thumb = image.crop((0, 0, size[0], size[1]))
-        offset_x = int(max((size[0] - image_size[0]) / 2, 0))
-        offset_y = int(max((size[1] - image_size[1]) / 2, 0))
-        img = ImageChops.offset(thumb, offset_x, offset_y)
+#         F_IN = file_path
+#         size = (256, 256)
+#         image = Image.open(F_IN)
+#         image.thumbnail(size, Image.ANTIALIAS)
+#         image_size = image.size
+#         thumb = image.crop((0, 0, size[0], size[1]))
+#         offset_x = int(max((size[0] - image_size[0]) / 2, 0))
+#         offset_y = int(max((size[1] - image_size[1]) / 2, 0))
+#         img = ImageChops.offset(thumb, offset_x, offset_y)
 
-        img_array = keras.preprocessing.image.img_to_array(img)
-        img_array = tf.expand_dims(img_array, 0)
+#         img_array = keras.preprocessing.image.img_to_array(img)
+#         img_array = tf.expand_dims(img_array, 0)
 
-        # Se normaliza la imagen
-        img_array = (img_array - np.min(img_array)) / \
-            (np.max(img_array) - np.min(img_array))
+#         # Se normaliza la imagen
+#         img_array = (img_array - np.min(img_array)) / \
+#             (np.max(img_array) - np.min(img_array))
 
-        # _______________________________________________________________
-        # FOR TO MODELS
-        dataframe_all = pd.DataFrame()
+#         # _______________________________________________________________
+#         # FOR TO MODELS
+#         dataframe_all = pd.DataFrame()
 
-        dir_model = '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models'
+#         dir_model = '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models'
 
-        model_list = ['/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model1',
-                      '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model2_1']
+#         model_list = ['/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model1',
+#                       '/Users/juansebastianmacchia/Desktop/__GITHUB/styleid_app/models/tfLite_models/model.tflite_model2_1']
 
-        for model in model_list:
+#         for model in model_list:
 
-            dataframe_aux = pd.DataFrame()
+#             dataframe_aux = pd.DataFrame()
 
-            # model_path = os.path.join(dir_model, model)
+#             # model_path = os.path.join(dir_model, model)
 
-            interpreter = tf.lite.Interpreter(model_path=model)
-            interpreter.allocate_tensors()
-            input_details = interpreter.get_input_details()
-            output_details = interpreter.get_output_details()
-            # print("Input Shape:", input_details[0]['shape'])
-            # print("Input Type:", input_details[0]['dtype'])
-            # print("Output Shape:", output_details[0]['shape'])
-            # print("Output Type:", output_details[0]['dtype'])
-            interpreter.allocate_tensors()
+#             interpreter = tf.lite.Interpreter(model_path=model)
+#             interpreter.allocate_tensors()
+#             input_details = interpreter.get_input_details()
+#             output_details = interpreter.get_output_details()
+#             # print("Input Shape:", input_details[0]['shape'])
+#             # print("Input Type:", input_details[0]['dtype'])
+#             # print("Output Shape:", output_details[0]['shape'])
+#             # print("Output Type:", output_details[0]['dtype'])
+#             interpreter.allocate_tensors()
 
-            # contador = 0
-            dataframe_aux = pd.DataFrame()
-            print('Model:', model)
-        # _______________________________________________________________
-        # make the prediction
-            interpreter.set_tensor(input_details[0]['index'], img_array)
-            interpreter.invoke()
-            tflite_model_predictions = interpreter.get_tensor(
-                output_details[0]['index'])
+#             # contador = 0
+#             dataframe_aux = pd.DataFrame()
+#             print('Model:', model)
+#         # _______________________________________________________________
+#         # make the prediction
+#             interpreter.set_tensor(input_details[0]['index'], img_array)
+#             interpreter.invoke()
+#             tflite_model_predictions = interpreter.get_tensor(
+#                 output_details[0]['index'])
 
-            preds = tflite_model_predictions
+#             preds = tflite_model_predictions
 
-            dataframe_aux = pd.DataFrame(np.vstack(preds))
+#             dataframe_aux = pd.DataFrame(np.vstack(preds))
 
-            dataframe_all = pd.concat(
-                [dataframe_all, dataframe_aux], axis=1, ignore_index=True)
-        model = model
-        # ______________________________________________________
+#             dataframe_all = pd.concat(
+#                 [dataframe_all, dataframe_aux], axis=1, ignore_index=True)
+#         model = model
+#         # ______________________________________________________
 
-        class_names1 = ['Abstract Art', 'Baroque', 'Cubism',
-                        'High Renaissance', 'Impressionism', 'Pop Art']
-        # return (
-        #     "   {} with a {:.2f} percent confidence."
-        #     .format(class_names1[np.argmax(tflite_model_predictions)], 100 * np.max(tflite_model_predictions))
-        # )
-        return str(dataframe_all)
+#         class_names1 = ['Abstract Art', 'Baroque', 'Cubism',
+#                         'High Renaissance', 'Impressionism', 'Pop Art']
+#         # return (
+#         #     "   {} with a {:.2f} percent confidence."
+#         #     .format(class_names1[np.argmax(tflite_model_predictions)], 100 * np.max(tflite_model_predictions))
+#         # )
+#         return str(dataframe_all)
 
-        # return str(format(class_names[np.argmax(score)]))
-        # return print(
-        #     "This image most likely belongs to {} with a {:.2f} percent confidence."
-        #     .format(class_names[np.argmax(score)], 100 * np.max(score))
-        # )
-    return None
+#         # return str(format(class_names[np.argmax(score)]))
+#         # return print(
+#         #     "This image most likely belongs to {} with a {:.2f} percent confidence."
+#         #     .format(class_names[np.argmax(score)], 100 * np.max(score))
+#         # )
+#     return None
 
 
 if __name__ == '__main__':
