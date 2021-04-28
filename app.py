@@ -10,11 +10,10 @@ import tensorflow as tf
 import pandas as pd
 
 
-# Keras
-# from keras.applications.imagenet_utils import preprocess_input, decode_predictions
-# from keras.models import load_model
-# from keras.preprocessing import image
-# from tensorflow import keras
+from keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from keras.models import load_model
+from keras.preprocessing import image
+from tensorflow import keras
 
 # Flask utils
 # from flask import Flask, redirect, url_for, request, render_template
