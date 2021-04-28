@@ -2,12 +2,12 @@
 from flask import Flask, request, jsonify
 
 # import sys
-# import os
+import os
 # import glob
 # import re
-# import numpy as np
-# import tensorflow as tf
-# import pandas as pd
+import numpy as np
+import tensorflow as tf
+import pandas as pd
 
 
 # Keras
