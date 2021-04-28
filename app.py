@@ -1,26 +1,27 @@
 # app.py
-from PIL import Image, ImageChops
-from gevent.pywsgi import WSGIServer
-from werkzeug.utils import secure_filename
-from tensorflow import keras
-from keras.preprocessing import image
-from keras.models import load_model
-from keras.applications.imagenet_utils import preprocess_input, decode_predictions
-import pandas as pd
-import tensorflow as tf
-import numpy as np
-import re
-import glob
-import os
 from flask import Flask, request, jsonify
 
-mport sys
+import sys
+import os
+import glob
+import re
+import numpy as np
+import tensorflow as tf
+import pandas as pd
 
 
 # Keras
+from keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from keras.models import load_model
+from keras.preprocessing import image
+from tensorflow import keras
 
 # Flask utils
 # from flask import Flask, redirect, url_for, request, render_template
+from werkzeug.utils import secure_filename
+from gevent.pywsgi import WSGIServer
+
+from PIL import Image, ImageChops
 
 
 app = Flask(__name__)
