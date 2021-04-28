@@ -20,7 +20,7 @@ from tensorflow import keras
 # from werkzeug.utils import secure_filename
 # from gevent.pywsgi import WSGIServer
 
-from PIL import Image, ImageChops
+from Pillow import Image, ImageChops
 
 
 app = Flask(__name__)
