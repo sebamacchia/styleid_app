@@ -5,5 +5,4 @@ numpy
 tensorflow-cpu
 werkzeug
 pandas
-opencv-python
 gunicorn

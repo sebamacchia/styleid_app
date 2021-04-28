@@ -21,7 +21,7 @@ from tensorflow import keras
 # from gevent.pywsgi import WSGIServer
 
 # from PIL import Image, ImageChops
-import cv2
+# import cv2
 
 
 app = Flask(__name__)
