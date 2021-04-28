@@ -5,4 +5,4 @@ numpy
 tensorflow-cpu
 werkzeug
 pandas
-PIL=1.1.7
+PIL
