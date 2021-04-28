@@ -5,4 +5,4 @@ numpy
 tensorflow-cpu
 werkzeug
 pandas
-Pillow
+opencv-python
