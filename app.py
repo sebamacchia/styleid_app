@@ -28,9 +28,14 @@ from PIL import Image
 app = Flask(__name__)
 
 
+# @app.route('/')
+# def index():
+#     return "<h1>HOLA STYLEIDc !!</h1>"
+
 @app.route('/')
 def index():
-    return "<h1>HOLA STYLEIDc !!</h1>"
+    # Main page
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
