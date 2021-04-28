@@ -20,8 +20,8 @@ from tensorflow import keras
 # from werkzeug.utils import secure_filename
 # from gevent.pywsgi import WSGIServer
 
-# from PIL import Image, ImageChops
-import cv2
+from PIL import Image, ImageChops
+# import cv2
 
 
 app = Flask(__name__)
