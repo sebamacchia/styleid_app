@@ -4,6 +4,4 @@ keras
 numpy
 tensorflow-cpu
 werkzeug
-gunicorn
-uwsgi
 pandas
