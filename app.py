@@ -37,7 +37,7 @@ app = Flask(__name__)
 def index():
     # Main page
     interpreter = tf.lite.Interpreter(
-        model_path='https://style-id.s3-us-west-1.amazonaws.com/model.tflite_model1')
+        model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
     return "<h1>Modelo: {interpreter}</h1>"
 
