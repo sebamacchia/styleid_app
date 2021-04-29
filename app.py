@@ -36,16 +36,16 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Main page
-    # interpreter = tf.lite.Interpreter(
-    #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    interpreter = tf.lite.Interpreter(
+        model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
     # data = pd.read_csv(
     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
-    model = tf.keras.models.load_model(
+    # model = tf.keras.models.load_model(
         'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-    return "<h1>m: {model}</h1>"
+    return "<h1>m: {interpreter}</h1>"
 
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded = True, port = 5000)
