@@ -37,9 +37,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Main page
-    s = io.BytesIO(tf.lite.Interpreter(
-        model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1'))
-
+    s = io.BytesIO(
+        'https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    # model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1'
     # interpreter = tf.lite.Interpreter(
     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
@@ -47,7 +47,8 @@ def index():
     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
     # model = tf.keras.models.load_model(
     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-    return "<h1>m:{s}</h1>"
+    interpreter = tf.lite.Interpreter(model_content=s)
+    return "<h1>m:{interpreter}</h1>"
 
 
 if __name__ == '__main__':
