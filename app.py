@@ -37,8 +37,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Main page
-    s = io.BytesIO(b
-                   'https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    s = io.BytesIO(
+        b'https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1'
     # interpreter = tf.lite.Interpreter(
     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
