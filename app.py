@@ -32,10 +32,14 @@ app = Flask(__name__)
 # def index():
 #     return "<h1>HOLA STYLEIDc !!</h1>"
 
+
 @app.route('/')
 def index():
     # Main page
-    return render_template('index.html')
+    interpreter = tf.lite.Interpreter(
+        model_path='https://style-id.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    # return render_template('index.html')
+    return "<h1>Modelo: {interpreter}</h1>"
 
 
 if __name__ == '__main__':
