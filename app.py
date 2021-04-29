@@ -39,7 +39,7 @@ def index():
     interpreter = tf.lite.Interpreter(
         model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
-    return "<h1>Modelo cargado: {interpreter}</h1>"
+    return "<h1>Modelo: {interpreter}</h1>"
 
 
 if __name__ == '__main__':
