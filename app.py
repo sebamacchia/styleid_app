@@ -36,10 +36,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Main page
-    interpreter = tf.lite.Interpreter(
-        model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    # interpreter = tf.lite.Interpreter(
+    #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
-    return "<h1>Modelo: {interpreter}</h1>"
+    im = Image.open(
+        'https://styleidam.s3-us-west-1.amazonaws.com/Abstract_Art_1.jpg', 0)
+    return "<h1>Modelo: {im}</h1>"
 
 
 if __name__ == '__main__':
