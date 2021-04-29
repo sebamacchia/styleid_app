@@ -48,6 +48,7 @@ def index():
     # model = tf.keras.models.load_model(
     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
     interpreter = tf.lite.Interpreter(model_content=s)
+    interpreter.allocate_tensors()
     return "<h1>m:{interpreter}</h1>"
 
 
