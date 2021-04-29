@@ -41,7 +41,7 @@ def index():
     # return render_template('index.html')
     # data = pd.read_csv(
     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
-    model = keras.models.load_model(
+    model = tf.keras.models.load_model(
         'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01.h5')
     return "<h1>m: {model}</h1>"
 
