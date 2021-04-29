@@ -43,7 +43,7 @@ def index():
     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
     # model = tf.keras.models.load_model(
     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-    return "<h1>m: {interpreter}</h1>"
+    return "<h1>m:</h1>"
 
 
 if __name__ == '__main__':
