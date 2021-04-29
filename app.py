@@ -39,9 +39,9 @@ def index():
     # interpreter = tf.lite.Interpreter(
     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
-    im = Image.open(
-        'https://styleidam.s3-us-west-1.amazonaws.com/Abstract_Art_1.jpg')
-    return "<h1>Modelo: {im}</h1>"
+    data = pandas.read_csv(
+        'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
+    return "<h1>Modelo: {data}</h1>"
 
 
 if __name__ == '__main__':
