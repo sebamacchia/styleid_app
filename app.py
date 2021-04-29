@@ -39,7 +39,7 @@ def index():
     # interpreter = tf.lite.Interpreter(
     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
-    data = pandas.read_csv(
+    data = pd.read_csv(
         'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
     return "<h1>Modelo: {data}</h1>"
 
