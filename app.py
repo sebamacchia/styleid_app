@@ -36,11 +36,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Main page
-    # interpreter = tf.lite.Interpreter(
-    #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+    interpreter = tf.lite.Interpreter(
+        model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
-    data = pd.read_csv(
-        'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
+    # data = pd.read_csv(
+    #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
     return "<h1>m: {data}</h1>"
 
 
