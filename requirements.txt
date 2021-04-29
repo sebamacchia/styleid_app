@@ -7,3 +7,4 @@ werkzeug
 pandas
 gunicorn
 pillow==6.2.0
+io
