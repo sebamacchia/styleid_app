@@ -41,7 +41,7 @@ def index():
     # return render_template('index.html')
     data = pd.read_csv(
         'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
-    return "<h1>Modelo: {data}</h1>"
+    return "<h1>m: {data}</h1>"
 
 
 if __name__ == '__main__':
