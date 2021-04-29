@@ -40,7 +40,7 @@ def index():
     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
     # return render_template('index.html')
     im = Image.open(
-        'https://styleidam.s3-us-west-1.amazonaws.com/Abstract_Art_1.jpg', 0)
+        'https://styleidam.s3-us-west-1.amazonaws.com/Abstract_Art_1.jpg')
     return "<h1>Modelo: {im}</h1>"
 
 
