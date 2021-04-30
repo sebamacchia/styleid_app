@@ -10,4 +10,5 @@ pillow==6.2.0
 # tflite-runtime 
 # tflite
 # --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
---extra-index-url https://google-coral.github.io/py-repo/ tflite-runtime
+# --extra-index-url https://google-coral.github.io/py-repo/ tflite-runtime
+tflite-runtime==2.5.0
