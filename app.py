@@ -19,9 +19,9 @@ import io
 import tflite_runtime.interpreter as tflite
 
 # Flask utils
-# from flask import Flask, redirect, url_for, request, render_template
-# from werkzeug.utils import secure_filename
-# from gevent.pywsgi import WSGIServer
+from flask import Flask, redirect, url_for, request, render_template
+from werkzeug.utils import secure_filename
+from gevent.pywsgi import WSGIServer
 
 # from PIL import Image, ImageChops
 from PIL import Image
