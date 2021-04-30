@@ -9,7 +9,7 @@ import os
 # import tensorflow as tf
 # import pandas as pd
 
-# import io
+import io
 
 # from keras.applications.imagenet_utils import preprocess_input, decode_predictions
 # from keras.models import load_model
@@ -49,9 +49,9 @@ def index():
     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
     # model = tf.keras.models.load_model(
     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-    interpreter = tf.lite.Interpreter(model_content=s)
-    interpreter.allocate_tensors()
-    return "<h1>m:{interpreter}</h1>"
+    # interpreter = tf.lite.Interpreter(model_content=s)
+    # interpreter.allocate_tensors()
+    return "<h1>m</h1>"
 
 
 if __name__ == '__main__':
