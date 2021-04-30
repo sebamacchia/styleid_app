@@ -2,9 +2,10 @@ flask
 gevent
 keras
 numpy
-# tensorflow-cpu
+tensorflow-cpu
 werkzeug
 pandas
 gunicorn
 pillow==6.2.0
-tflite-runtime 
+# tflite-runtime 
+tflite
