@@ -16,7 +16,7 @@ import io
 # from keras.preprocessing import image
 # from tensorflow import keras
 
-# import tflite_runtime.interpreter as tflite
+import tflite_runtime.interpreter as tflite
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template
