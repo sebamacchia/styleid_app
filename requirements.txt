@@ -1,6 +1,6 @@
 flask
 gevent
-keras
+# keras
 numpy
 # tensorflow-cpu
 werkzeug
