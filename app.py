@@ -1,10 +1,10 @@
 # app.py
-from flask import Flask, redirect, url_for, request, render_template
+# from flask import Flask, redirect, url_for, request, render_template
 
-# import sys
+import sys
 import os
-# import glob
-# import re
+import glob
+import re
 # import numpy as np
 # import tensorflow as tf
 # import pandas as pd
@@ -31,27 +31,27 @@ from PIL import Image
 app = Flask(__name__)
 
 
-# @app.route('/')
-# def index():
-#     return "<h1>HOLA STYLEIDc !!</h1>"
-
-
 @app.route('/')
 def index():
-    # Main page
-    # s = io.BytesIO(
-    # b'https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
-    # model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1'
-    # interpreter = tf.lite.Interpreter(
-    #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
-    # return render_template('index.html')
-    # data = pd.read_csv(
-    #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
-    # model = tf.keras.models.load_model(
-    # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-    # interpreter = tf.lite.Interpreter(model_content=s)
-    # interpreter.allocate_tensors()
-    return "<h1>m</h1>"
+    return "<h1>HOLA STYLEIDc !!</h1>"
+
+
+# @app.route('/')
+# def index():
+#     # Main page
+#     # s = io.BytesIO(
+#     # b'https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+#     # model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1'
+#     # interpreter = tf.lite.Interpreter(
+#     #     model_path='https://styleidam.s3-us-west-1.amazonaws.com/model.tflite_model1')
+#     # return render_template('index.html')
+#     # data = pd.read_csv(
+#     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
+#     # model = tf.keras.models.load_model(
+#     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
+#     # interpreter = tf.lite.Interpreter(model_content=s)
+#     # interpreter.allocate_tensors()
+#     return "<h1>m</h1>"
 
 
 if __name__ == '__main__':
