@@ -33,7 +33,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "<h1>HOLA STYLEIDc !!</h1>"
+    interpreter = tflite(model_content=s)
+    return "<h1>HOLA STYLEIDc !!{interpreter}</h1>"
 
 
 # @app.route('/')
@@ -49,7 +50,7 @@ def index():
 #     #     'https://styleidam.s3-us-west-1.amazonaws.com/prueba.csv')
 #     # model = tf.keras.models.load_model(
 #     # 'https://styleidam.s3-us-west-1.amazonaws.com/model_baseline01')
-#     # interpreter = tf.lite.Interpreter(model_content=s)
+    # interpreter = tf.lite.Interpreter(model_content=s)
 #     # interpreter.allocate_tensors()
 #     return "<h1>m</h1>"
 
