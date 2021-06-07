@@ -118,6 +118,8 @@ def upload():
 
         print(f'el score fue de {score}')
 
+        print(str(format(class_names[np.argmax(score)])))
+
         return str(format(class_names[np.argmax(score)]))
         # return print(
         #     "This image most likely belongs to {} with a {:.2f} percent confidence."
