@@ -80,6 +80,7 @@ class_names = ['Abstract Art', 'Baroque', 'Cubism',
 def model_predict(img_path, model):
 
     img = image.load_img(img_path, target_size=(224, 224))
+    print(f'cargo la imagen {img}')
 
     # Preprocessing the image
     x = image.img_to_array(img)
@@ -87,6 +88,8 @@ def model_predict(img_path, model):
     x = (x - np.min(x)) / (np.max(x) - np.min(x))
 
     preds = model.predict(x)
+
+    print(f'la prediccion es: {preds}')
 
     return preds
 
@@ -112,6 +115,8 @@ def upload():
         # Make prediction
         prediction = model_predict(file_path, model)
         score = tf.nn.softmax(prediction[0])
+
+        print(f'el score fue de {score}')
 
         return str(format(class_names[np.argmax(score)]))
         # return print(
