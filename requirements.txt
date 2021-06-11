@@ -2,8 +2,8 @@ flask
 gevent
 keras
 numpy
-tensorflow
-# tensorflow-cpu
+# tensorflow
+tensorflow-cpu
 werkzeug
 pandas
 gunicorn
