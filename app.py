@@ -21,7 +21,7 @@ from gevent.pywsgi import WSGIServer
 # Define a flask app
 app = Flask(__name__)
 
-MODEL_PATH = 'models/VGG16.h5'
+MODEL_PATH = '/models/MobileNet_full_wikiart_R2.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH, compile=False)
