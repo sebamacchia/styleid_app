@@ -21,7 +21,7 @@ from gevent.pywsgi import WSGIServer
 # Define a flask app
 app = Flask(__name__)
 
-MODEL_PATH = 'models/MobileNet_full_wikiart_R2.h5'
+MODEL_PATH = 'models/VGG16.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH, compile=False)
@@ -80,7 +80,7 @@ class_names = ['Abstract Art', 'Baroque', 'Cubism',
 def model_predict(img_path, model):
 
     img = image.load_img(img_path, target_size=(224, 224))
-    print(f'cargo la imagen {img}')
+    print('esta haciendo la prediccion')
 
     # Preprocessing the image
     x = image.img_to_array(img)
@@ -103,6 +103,7 @@ def index():
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
+        print('cargo la imagen')
         # Get the file from post request
         f = request.files['file']
 
