@@ -5,8 +5,8 @@ numpy
 # tensorflow
 tensorflow-cpu
 werkzeug
-# pandas
+pandas
 gunicorn
-# pillow==6.2.0
+pillow==6.2.0
 
 
